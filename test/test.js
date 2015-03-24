@@ -25,4 +25,15 @@ describe('Zoho Invoice', function () {
     assert(zohoInvoice.authtoken);
     assert.equal(zohoInvoice.authtoken, config.invoice.authtoken);
   });
+
+  it('zohoInvoice should have this public functions', function () {
+    assert.equal(typeof zohoInvoice.getRecords, 'function');
+    assert.equal(typeof zohoInvoice.getRecordById, 'function');
+    assert.equal(typeof zohoInvoice.createRecord, 'function');
+    assert.equal(typeof zohoInvoice.deleteRecord, 'function');
+  });
+
+  it('zohoInvoice should have this private functions', function () {
+    assert.equal(typeof zohoInvoice._request, 'function');
+  });
 });
