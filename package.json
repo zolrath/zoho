@@ -1,0 +1,31 @@
+{
+  "name": "node-zoho-lib",
+  "version": "0.0.1",
+  "description": "Node.js client library for Zoho",
+  "main": "./lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/4yopping/node-zoho-lib"
+  },
+  "keywords": [
+    "zoho",
+    "node"
+  ],
+  "author": "Marco Godínez <markotom@4yopping.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/4yopping/node-zoho-lib/issues"
+  },
+  "homepage": "https://github.com/4yopping/node-zoho-lib",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-mocha": "^2.0.0",
+    "sinon": "^1.14.1"
+  }
+}
