@@ -19,6 +19,9 @@ describe('Zoho Invoice', function () {
   });
 
   it('zohoInvoice should have this properties', function () {
+    assert(zohoInvoice.protocol);
+    assert(zohoInvoice.host);
+    assert(zohoInvoice.port);
     assert(zohoInvoice.authtoken);
     assert.equal(zohoInvoice.authtoken, config.invoice.authtoken);
   });
