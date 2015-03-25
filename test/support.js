@@ -36,6 +36,9 @@ describe('Zoho Support', function () {
     assert.equal(typeof zohoSupport._request, 'function');
   });
 
+  // To assign created id;
+  var created_id;
+
   describe('Zoho Support Requests', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
@@ -77,6 +80,8 @@ describe('Zoho Support', function () {
         assert.equal(typeof response, 'object'); // Response
         assert.equal(response.code, 2001); // No errors
 
+        created_id = response.data.Accounts.record.id;
+
         done();
       }.bind(this.callback), 500);
     });
@@ -114,5 +119,40 @@ describe('Zoho Support', function () {
       zohoSupport.createRecord('accounts', null, this.callback);
       assert.notEqual(this.callback.args[3][0], null);
     });
+  });
+
+  describe('Delete Zoho Support records', function () {
+    beforeEach(function () {
+      this.callback = sinon.spy();
+    });
+
+    it('should delete an account', function (done) {
+      zohoSupport.deleteRecord('accounts', created_id, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 2003); // No errors
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should fail when trying delete an account with id param missing', function () {
+      zohoSupport.deleteRecord('accounts', undefined, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoSupport.deleteRecord('accounts', {}, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoSupport.deleteRecord('accounts', null, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+    });
+
   });
 });
