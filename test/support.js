@@ -193,6 +193,53 @@ describe('Zoho Support', function () {
     });
   });
 
+  describe('Update Zoho Support records', function () {
+    beforeEach(function () {
+      this.params = { 'Account Name': faker.company.companyName() };
+      this.callback = sinon.spy();
+    });
+
+    it('should update an account', function (done) {
+      zohoSupport.updateRecord('accounts', created_id, this.params, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 2002); // No errors
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should fail when trying update an account with id param missing', function () {
+      zohoSupport.updateRecord('accounts', undefined, this.params, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoSupport.updateRecord('accounts', {}, this.params, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoSupport.updateRecord('accounts', null, this.params, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+    });
+
+    it('should fail when trying to update an account without params', function () {
+      zohoSupport.updateRecord('accounts', created_id, undefined, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoSupport.updateRecord('accounts', created_id, {}, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoSupport.updateRecord('accounts', created_id, null, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+    });
+  });
+
   describe('Delete Zoho Support records', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
