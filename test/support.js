@@ -125,6 +125,44 @@ describe('Zoho Support', function () {
     });
   });
 
+  describe('Get Zoho Support records', function () {
+    beforeEach(function () {
+      this.callback = sinon.spy();
+    });
+
+    it('should get accounts with params argument', function (done) {
+      zohoSupport.getRecords('accounts', {}, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 0); // No errors
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should get accounts without params argument', function (done) {
+      zohoSupport.getRecords('accounts', this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 0); // No errors
+
+        done();
+      }.bind(this.callback), 500);
+    });
+  });
+
   describe('Delete Zoho Support records', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
