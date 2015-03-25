@@ -21,17 +21,16 @@ invoice.getRecords('contacts', function (err, data) {
   if (err) {
     return console.log(err);
   }
-  
+
   console.log(data);
 });
-
 ```
 
 ## Supports
 
-* ~~Zoho CRM~~
+* Zoho CRM (Not implemented)
 * Zoho Invoice
-* ~~Zoho Support~~
+* Zoho Support
 
 ## Reference
 
