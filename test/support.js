@@ -102,6 +102,10 @@ describe('Zoho Support', function () {
         assert.equal(typeof response, 'object'); // Response
         assert.equal(response.code, 2001); // No errors
 
+        response.data.Accounts.record.forEach(function (account) {
+          zohoSupport.deleteRecord('accounts', account.id, function () {});
+        });
+
         done();
       }.bind(this.callback), 500);
     });
