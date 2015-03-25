@@ -47,10 +47,10 @@ describe('Zoho Invoice', function () {
 
         var error = this.args[0][0], response = this.args[0][1];
 
-        assert.equal(error, null); // No response errors
-        assert.equal(typeof response, 'object'); // Response
-        assert.equal(response.code, 5); // Invalid URL Passed
-        assert.equal(response.message, 'Invalid URL Passed');
+        assert.equal(response, null); // No response
+        assert.equal(typeof error, 'object'); // Found errors
+        assert.equal(error.code, 5); // Invalid URL Passed
+        assert.equal(error.message, 'Invalid URL Passed');
 
         done();
       }.bind(this.callback), 500);
