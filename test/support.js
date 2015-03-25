@@ -1,5 +1,6 @@
 var assert = require('assert'),
     sinon  = require('sinon'),
+    faker  = require('faker'),
     config = require('./config'),
     Zoho   = require('../lib');
 
@@ -55,6 +56,63 @@ describe('Zoho Support', function () {
 
         done();
       }.bind(this.callback), 500);
+    });
+  });
+
+  describe('Create Zoho Support records', function () {
+    beforeEach(function () {
+      this.params = { 'Account Name': faker.company.companyName() };
+      this.callback = sinon.spy();
+    });
+
+    it('should create an account', function (done) {
+      zohoSupport.createRecord('accounts', this.params, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 2001); // No errors
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should create multiple accounts', function (done) {
+      zohoSupport.createRecord('accounts', [
+        { 'Account Name': faker.company.companyName() },
+        { 'Account Name': faker.company.companyName() },
+        { 'Account Name': faker.company.companyName() }
+      ], this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 2001); // No errors
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should fail when trying to create an account without params', function () {
+      zohoSupport.createRecord('accounts', undefined, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoSupport.createRecord('accounts', {}, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoSupport.createRecord('accounts', [], this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+      zohoSupport.createRecord('accounts', null, this.callback);
+      assert.notEqual(this.callback.args[3][0], null);
     });
   });
 });
