@@ -1,4 +1,5 @@
 var assert = require('assert'),
+    sinon  = require('sinon'),
     config = require('./config'),
     Zoho   = require('../lib');
 
@@ -32,5 +33,28 @@ describe('Zoho Support', function () {
 
   it('zohoSupport should have this private functions', function () {
     assert.equal(typeof zohoSupport._request, 'function');
+  });
+
+  describe('Zoho Support Requests', function () {
+    beforeEach(function () {
+      this.callback = sinon.spy();
+    });
+
+    it('should be able to make requests to Zoho server', function (done) {
+      zohoSupport._request('GET', 'fakeroute', {}, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(response, null); // No response
+        assert.equal(typeof error, 'object'); // Found errors
+        assert.equal(error.code, 1001);
+        assert(/Unable to process your request/.test(error.message));
+
+        done();
+      }.bind(this.callback), 500);
+    });
   });
 });
