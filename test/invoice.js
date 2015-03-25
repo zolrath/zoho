@@ -24,6 +24,7 @@ describe('Zoho Invoice', function () {
     assert.equal(typeof zohoInvoice.getRecords, 'function');
     assert.equal(typeof zohoInvoice.getRecordById, 'function');
     assert.equal(typeof zohoInvoice.createRecord, 'function');
+    assert.equal(typeof zohoInvoice.updateRecord, 'function');
     assert.equal(typeof zohoInvoice.deleteRecord, 'function');
   });
 
