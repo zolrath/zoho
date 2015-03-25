@@ -1,5 +1,6 @@
 var assert = require('assert'),
     sinon  = require('sinon'),
+    faker  = require('faker'),
     config = require('./config'),
     Zoho   = require('../lib');
 
@@ -44,8 +45,7 @@ describe('Zoho Invoice', function () {
       setTimeout(function () {
         assert(this.calledOnce);
 
-        var error = this.args[0][0],
-            response = this.args[0][1];
+        var error = this.args[0][0], response = this.args[0][1];
 
         assert.equal(error, null); // No response errors
         assert.equal(typeof response, 'object'); // Response
@@ -59,18 +59,17 @@ describe('Zoho Invoice', function () {
 
   describe('Create Zoho Invoice records', function () {
     beforeEach(function () {
+      this.params = { contact_name: faker.company.companyName() };
       this.callback = sinon.spy();
     });
 
     it('should create a contact', function (done) {
-      var params = { contact_name: '4yopping' };
-      zohoInvoice.createRecord('contacts', params, this.callback);
+      zohoInvoice.createRecord('contacts', this.params, this.callback);
 
       setTimeout(function () {
         assert(this.calledOnce);
 
-        var error = this.args[0][0],
-            response = this.args[0][1];
+        var error = this.args[0][0], response = this.args[0][1];
 
 
         assert.equal(error, null); // No response errors
@@ -107,8 +106,7 @@ describe('Zoho Invoice', function () {
       setTimeout(function () {
         assert(this.calledOnce);
 
-        var error = this.args[0][0],
-            response = this.args[0][1];
+        var error = this.args[0][0], response = this.args[0][1];
 
         assert.equal(error, null); // No response errors
         assert.equal(typeof response, 'object'); // Response
@@ -124,8 +122,7 @@ describe('Zoho Invoice', function () {
       setTimeout(function () {
         assert(this.calledOnce);
 
-        var error = this.args[0][0],
-            response = this.args[0][1];
+        var error = this.args[0][0], response = this.args[0][1];
 
         assert.equal(error, null); // No response errors
         assert.equal(typeof response, 'object'); // Response
@@ -166,6 +163,56 @@ describe('Zoho Invoice', function () {
     });
   });
 
+  describe('Update Zoho Invoice records', function () {
+    beforeEach(function () {
+      this.params = { contact_name: faker.company.companyName() };
+      this.callback = sinon.spy();
+    });
+
+    it('should update a contact', function (done) {
+      var params = this.params;
+      zohoInvoice.updateRecord('contacts', created_id, this.params, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 0); // No errors
+
+        assert.equal(params.contact_name, response.contact.contact_name);
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should fail when trying update a contact with id param missing', function () {
+      zohoInvoice.updateRecord('contacts', undefined, this.params, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoInvoice.updateRecord('contacts', {}, this.params, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoInvoice.updateRecord('contacts', null, this.params, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+    });
+
+    it('should fail when trying to update a contact without params', function () {
+      zohoInvoice.updateRecord('contacts', created_id, undefined, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoInvoice.updateRecord('contacts', created_id, {}, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoInvoice.updateRecord('contacts', created_id, null, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+    });
+  });
+
   describe('Delete Zoho Invoice records', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
@@ -177,8 +224,7 @@ describe('Zoho Invoice', function () {
       setTimeout(function () {
         assert(this.calledOnce);
 
-        var error = this.args[0][0],
-            response = this.args[0][1];
+        var error = this.args[0][0], response = this.args[0][1];
 
         assert.equal(error, null); // No response errors
         assert.equal(typeof response, 'object'); // Response
