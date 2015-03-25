@@ -30,7 +30,29 @@ describe('Zoho Invoice', function () {
     assert.equal(typeof zohoInvoice._request, 'function');
   });
 
-  describe.only('Create Zoho Invoice records', function () {
+  describe('Zoho Requests', function () {
+    beforeEach(function () {
+      this.callback = sinon.spy();
+    });
+
+    it('should be able to make requests to Zoho server', function () {
+      zohoInvoice._request('GET', 'fakeroute', {}, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0],
+            response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 5); // Invalid URL Passed
+        assert.equal(response.message, 'Invalid URL Passed');
+      }.bind(this.callback), 100);
+    });
+  });
+
+  describe('Create Zoho Invoice records', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
     });
