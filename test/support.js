@@ -161,6 +161,36 @@ describe('Zoho Support', function () {
         done();
       }.bind(this.callback), 500);
     });
+
+    it('should get an account by id', function (done) {
+      zohoSupport.getRecordById('accounts', { id: created_id }, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 0); // No errors
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should fail when trying get an account without id property', function () {
+      zohoSupport.getRecordById('accounts', { id: undefined }, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoSupport.getRecordById('accounts', undefined, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoSupport.getRecordById('accounts', {}, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+      zohoSupport.getRecordById('accounts', null, this.callback);
+      assert.notEqual(this.callback.args[3][0], null);
+    });
   });
 
   describe('Delete Zoho Support records', function () {
