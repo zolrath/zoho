@@ -1,3 +1,3 @@
-# node-zoho-lib
+# Zoho
 
 Simplest Zoho integrations for Node.js
