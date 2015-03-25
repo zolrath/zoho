@@ -35,7 +35,7 @@ describe('Zoho Invoice', function () {
       this.callback = sinon.spy();
     });
 
-    it('should be able to make requests to Zoho server', function () {
+    it('should be able to make requests to Zoho server', function (done) {
       zohoInvoice._request('GET', 'fakeroute', {}, this.callback);
 
       setTimeout(function () {
@@ -48,7 +48,9 @@ describe('Zoho Invoice', function () {
         assert.equal(typeof response, 'object'); // Response
         assert.equal(response.code, 5); // Invalid URL Passed
         assert.equal(response.message, 'Invalid URL Passed');
-      }.bind(this.callback), 100);
+
+        done();
+      }.bind(this.callback), 500);
     });
   });
 
@@ -57,29 +59,40 @@ describe('Zoho Invoice', function () {
       this.callback = sinon.spy();
     });
 
-    it('should create a contact', function () {
+    it('should create a contact', function (done) {
       var params = { contact_name: '4yopping' };
       zohoInvoice.createRecord('contacts', params, this.callback);
-      assert(this.callback.calledOnce);
 
-      var error = this.callback.args[0][0],
-          response = this.callback.args[0][1];
+      setTimeout(function () {
+        assert(this.calledOnce);
 
-      assert.equal(error, null); // No response errors
-      assert.equal(typeof response, 'object'); // Response
-      assert.equal(response.code, 0); // No errors
+        var error = this.args[0][0],
+            response = this.args[0][1];
+
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 0); // No errors
+
+        done();
+      }.bind(this.callback), 500);
     });
 
-    it('should fail when trying to create a contact without params', function () {
+    it('should fail when trying to create a contact without params', function (done) {
       zohoInvoice.createRecord('contacts', {}, this.callback);
-      assert(this.callback.calledOnce);
 
-      var error = this.callback.args[0][0],
-          response = this.callback.args[0][1];
+      setTimeout(function () {
+        assert(this.calledOnce);
 
-      assert.equal(error, null); // No response errors
-      assert.equal(typeof response, 'object'); // Response
-      assert.notEqual(response.code, 0); // Error from Zoho
+        var error = this.args[0][0],
+            response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.notEqual(response.code, 0); // Error from Zoho
+
+        done();
+      }.bind(this.callback), 500);
     });
   });
 
