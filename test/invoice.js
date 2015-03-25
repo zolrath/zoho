@@ -101,14 +101,38 @@ describe('Zoho Invoice', function () {
       this.callback = sinon.spy();
     });
 
-    it('should get contacts with params argument', function () {
+    it('should get contacts with params argument', function (done) {
       zohoInvoice.getRecords('contacts', {}, this.callback);
-      assert(this.callback.calledOnce);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0],
+            response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 0); // No errors
+
+        done();
+      }.bind(this.callback), 500);
     });
 
-    it('should get contacts without params argument', function () {
+    it('should get contacts without params argument', function (done) {
       zohoInvoice.getRecords('contacts', this.callback);
-      assert(this.callback.calledOnce);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0],
+            response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 0); // No errors
+
+        done();
+      }.bind(this.callback), 500);
     });
   });
 });
