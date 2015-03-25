@@ -83,21 +83,16 @@ describe('Zoho Invoice', function () {
       }.bind(this.callback), 500);
     });
 
-    it('should fail when trying to create a contact without params', function (done) {
+    it('should fail when trying to create a contact without params', function () {
+      zohoInvoice.createRecord('contacts', undefined, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
       zohoInvoice.createRecord('contacts', {}, this.callback);
-
-      setTimeout(function () {
-        assert(this.calledOnce);
-
-        var error = this.args[0][0],
-            response = this.args[0][1];
-
-        assert.equal(error, null); // No response errors
-        assert.equal(typeof response, 'object'); // Response
-        assert.notEqual(response.code, 0); // Error from Zoho
-
-        done();
-      }.bind(this.callback), 500);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoInvoice.createRecord('contacts', null, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
     });
   });
 
