@@ -134,6 +134,36 @@ describe('Zoho Invoice', function () {
         done();
       }.bind(this.callback), 500);
     });
+
+    it('should get a contact by id', function (done) {
+      zohoInvoice.getRecordById('contacts', { id: created_id }, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null); // No response errors
+        assert.equal(typeof response, 'object'); // Response
+        assert.equal(response.code, 0); // No errors
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should fail when trying get a contact without id property', function () {
+      zohoInvoice.getRecordById('contacts', { id: undefined }, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoInvoice.getRecordById('contacts', undefined, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoInvoice.getRecordById('contacts', {}, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+      zohoInvoice.getRecordById('contacts', null, this.callback);
+      assert.notEqual(this.callback.args[3][0], null);
+    });
   });
 
   describe('Delete Zoho Invoice records', function () {
