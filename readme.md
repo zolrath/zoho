@@ -3,6 +3,8 @@
 
 # Zoho
 
+[![Join the chat at https://gitter.im/4yopping/zoho](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/4yopping/zoho?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Just a easy to use Zoho API integration for NodeJS, Object Oriented and REST API wrappers.
 
 ## Installation
