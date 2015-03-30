@@ -134,6 +134,46 @@ describe('Zoho CRM', function () {
     });
   });
 
+  describe('Get Zoho CRM records', function () {
+    beforeEach(function () {
+      this.callback = sinon.spy();
+    });
+
+    it('should get leads with params argument', function (done) {
+      zohoCRM.getRecords('leads', {}, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null);
+        assert.equal(typeof response, 'object');
+        assert.equal(response.code, 0);
+        assert(response.data.Leads.row);
+
+        done();
+      }.bind(this.callback), 500);
+    });
+
+    it('should get leads without params argument', function (done) {
+      zohoCRM.getRecords('leads', this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null);
+        assert.equal(typeof response, 'object');
+        assert.equal(response.code, 0);
+        assert(response.data.Leads.row);
+
+        done();
+      }.bind(this.callback), 500);
+    });
+  });
+
   describe('Delete Zoho CRM records', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
