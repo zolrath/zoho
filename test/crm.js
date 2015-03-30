@@ -34,6 +34,9 @@ describe('Zoho CRM', function () {
     assert.equal(typeof zohoCRM._request, 'function');
   });
 
+  // To assign created id;
+  var created_id;
+
   describe('Zoho Requests', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
@@ -56,6 +59,7 @@ describe('Zoho CRM', function () {
       }.bind(this.callback), 500);
     });
   });
+
   describe('Create Zoho CRM records', function () {
     beforeEach(function () {
       this.params = {
@@ -93,6 +97,40 @@ describe('Zoho CRM', function () {
         assert.equal(response.code, 0);
 
         created_id = response.data.FL[0].content;
+
+        done();
+      }.bind(this.callback), 500);
+    });
+  });
+
+  describe('Delete Zoho CRM records', function () {
+    beforeEach(function () {
+      this.callback = sinon.spy();
+    });
+
+    it('should fail when trying delete a lead with id param missing', function () {
+      zohoCRM.deleteRecord('leads', undefined, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoCRM.deleteRecord('leads', {}, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoCRM.deleteRecord('leads', null, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+    });
+
+    it('should delete a lead', function (done) {
+      zohoCRM.deleteRecord('leads', created_id, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null);
+        assert.equal(typeof response, 'object');
+        assert.equal(response.code, 5000);
 
         done();
       }.bind(this.callback), 500);
