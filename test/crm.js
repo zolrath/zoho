@@ -172,6 +172,37 @@ describe('Zoho CRM', function () {
         done();
       }.bind(this.callback), 500);
     });
+
+    it('should fail when trying get a lead without id property', function () {
+      zohoCRM.getRecordById('leads', { id: undefined }, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoCRM.getRecordById('leads', undefined, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoCRM.getRecordById('leads', {}, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+      zohoCRM.getRecordById('leads', null, this.callback);
+      assert.notEqual(this.callback.args[3][0], null);
+    });
+
+    it('should get a lead by id', function (done) {
+      zohoCRM.getRecordById('leads', { id: created_id }, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null);
+        assert.equal(typeof response, 'object');
+        assert.equal(response.code, 0);
+        assert(response.data.Leads.row);
+
+        done();
+      }.bind(this.callback), 500);
+    });
   });
 
   describe('Delete Zoho CRM records', function () {
