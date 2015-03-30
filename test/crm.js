@@ -101,6 +101,37 @@ describe('Zoho CRM', function () {
         done();
       }.bind(this.callback), 500);
     });
+
+    it('should create multiple leads', function (done) {
+      zohoCRM.createRecord('leads', [
+        {
+          'First Name': faker.name.firstName(),
+          'Last Name': faker.name.lastName(),
+          Company: faker.company.companyName()
+        },
+        {
+          'First Name': faker.name.firstName(),
+          'Last Name': faker.name.lastName(),
+          Company: faker.company.companyName()
+        }
+      ], this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null);
+        assert.equal(typeof response, 'object');
+        assert.equal(response.code, 0);
+
+        response.data.forEach(function (record) {
+          zohoCRM.deleteRecord('leads', record.FL[0].content, function () {});
+        });
+
+        done();
+      }.bind(this.callback), 500);
+    });
   });
 
   describe('Delete Zoho CRM records', function () {
