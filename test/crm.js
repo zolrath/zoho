@@ -1,5 +1,6 @@
 var assert = require('assert'),
     sinon  = require('sinon'),
+    faker  = require('faker'),
     config = require('./config'),
     Zoho   = require('../lib');
 
@@ -50,6 +51,48 @@ describe('Zoho CRM', function () {
         assert.equal(typeof error, 'object');
         assert.equal(error.code, 4600);
         assert(/Unable to process your request/.test(error.message));
+
+        done();
+      }.bind(this.callback), 500);
+    });
+  });
+  describe('Create Zoho CRM records', function () {
+    beforeEach(function () {
+      this.params = {
+        'First Name': faker.name.firstName(),
+        'Last Name': faker.name.lastName(),
+        Company: faker.company.companyName()
+      };
+      this.callback = sinon.spy();
+    });
+
+    it('should fail when trying to create a lead without params', function () {
+      zohoCRM.createRecord('leads', undefined, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoCRM.createRecord('leads', {}, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoCRM.createRecord('leads', [], this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+      zohoCRM.createRecord('leads', null, this.callback);
+      assert.notEqual(this.callback.args[3][0], null);
+    });
+
+    it('should create a lead', function (done) {
+      zohoCRM.createRecord('leads', this.params, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null);
+        assert.equal(typeof response, 'object');
+        assert.equal(response.code, 0);
+
+        created_id = response.data.FL[0].content;
 
         done();
       }.bind(this.callback), 500);
