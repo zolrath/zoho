@@ -1,4 +1,4 @@
-# Zoho Module
+# Zoho REST API Wrapper
 [![npm version](https://badge.fury.io/js/zoho.svg)](http://badge.fury.io/js/zoho)
 [![Build Status](https://travis-ci.org/4yopping/zoho.svg)](https://travis-ci.org/4yopping/zoho)
 [![Join the chat at https://gitter.im/4yopping/zoho](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/4yopping/zoho?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -15,7 +15,27 @@ $ npm install zoho
 
 ```js
 var Zoho = require('zoho');
+```
 
+Using Zoho CRM:
+
+```js
+var crm = new Zoho.CRM({
+  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
+});
+
+crm.getRecords('leads', function (err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log(data);
+});
+```
+
+Using Zoho Invoice:
+
+```js
 var invoice = new Zoho.Invoice({
   authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
 });
@@ -29,9 +49,25 @@ invoice.getRecords('contacts', function (err, data) {
 });
 ```
 
+Using Zoho Support:
+
+```js
+var support = new Zoho.Support({
+  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
+});
+
+support.getRecords('contacts', function (err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log(data);
+});
+```
+
 ## Supports
 
-* Zoho CRM (Not implemented)
+* Zoho CRM
 * Zoho Invoice
 * Zoho Support
 
