@@ -205,6 +205,57 @@ describe('Zoho CRM', function () {
     });
   });
 
+  describe('Update Zoho CRM records', function () {
+    beforeEach(function () {
+      this.params = {
+        'First Name': faker.name.firstName(),
+        'Last Name': faker.name.lastName(),
+        Company: faker.company.companyName()
+      };
+      this.callback = sinon.spy();
+    });
+
+    it('should fail when trying update a lead with id param missing', function () {
+      zohoCRM.updateRecord('leads', undefined, this.params, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoCRM.updateRecord('leads', {}, this.params, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoCRM.updateRecord('leads', null, this.params, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+    });
+
+    it('should fail when trying to update an account without params', function () {
+      zohoCRM.updateRecord('leads', created_id, undefined, this.callback);
+      assert(this.callback.calledOnce);
+      assert.notEqual(this.callback.args[0][0], null);
+      zohoCRM.updateRecord('leads', created_id, {}, this.callback);
+      assert(this.callback.calledTwice);
+      assert.notEqual(this.callback.args[1][0], null);
+      zohoCRM.updateRecord('leads', created_id, null, this.callback);
+      assert(this.callback.calledThrice);
+      assert.notEqual(this.callback.args[2][0], null);
+    });
+
+    it('should update a lead', function (done) {
+      zohoCRM.updateRecord('leads', created_id, this.params, this.callback);
+
+      setTimeout(function () {
+        assert(this.calledOnce);
+
+        var error = this.args[0][0], response = this.args[0][1];
+
+        assert.equal(error, null);
+        assert.equal(typeof response, 'object');
+        assert.equal(response.code, 0);
+
+        done();
+      }.bind(this.callback), 500);
+    });
+  });
+
   describe('Delete Zoho CRM records', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
