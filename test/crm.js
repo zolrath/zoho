@@ -56,7 +56,7 @@ describe('Zoho CRM', function () {
         assert(/Unable to process your request/.test(error.message));
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
   });
 
@@ -99,7 +99,7 @@ describe('Zoho CRM', function () {
         created_id = response.data.FL[0].content;
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should create multiple leads', function (done) {
@@ -130,7 +130,7 @@ describe('Zoho CRM', function () {
         });
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
   });
 
@@ -153,7 +153,7 @@ describe('Zoho CRM', function () {
         assert(response.data.Leads.row);
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should get leads without params argument', function (done) {
@@ -170,7 +170,7 @@ describe('Zoho CRM', function () {
         assert(response.data.Leads.row);
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying get a lead without id property', function () {
@@ -201,7 +201,7 @@ describe('Zoho CRM', function () {
         assert(response.data.Leads.row);
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
   });
 
@@ -252,7 +252,7 @@ describe('Zoho CRM', function () {
         assert.equal(response.code, 0);
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
   });
 
@@ -286,7 +286,7 @@ describe('Zoho CRM', function () {
         assert.equal(response.code, 5000);
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
   });
 });

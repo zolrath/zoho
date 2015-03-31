@@ -58,7 +58,7 @@ describe('Zoho Support', function () {
         assert(/Unable to process your request/.test(error.message));
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
   });
 
@@ -83,7 +83,7 @@ describe('Zoho Support', function () {
         created_id = response.data.Accounts.record.id;
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should create multiple accounts', function (done) {
@@ -107,7 +107,7 @@ describe('Zoho Support', function () {
         });
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying to create an account without params', function () {
@@ -143,7 +143,7 @@ describe('Zoho Support', function () {
         assert.equal(response.code, 0); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should get accounts without params argument', function (done) {
@@ -159,7 +159,7 @@ describe('Zoho Support', function () {
         assert.equal(response.code, 0); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should get an account by id', function (done) {
@@ -175,7 +175,7 @@ describe('Zoho Support', function () {
         assert.equal(response.code, 0); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying get an account without id property', function () {
@@ -212,7 +212,7 @@ describe('Zoho Support', function () {
         assert.equal(response.code, 2002); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying update an account with id param missing', function () {
@@ -258,7 +258,7 @@ describe('Zoho Support', function () {
         assert.equal(response.code, 2003); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying delete an account with id param missing', function () {

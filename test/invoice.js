@@ -54,7 +54,7 @@ describe('Zoho Invoice', function () {
         assert.equal(error.message, 'Invalid URL Passed');
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
   });
 
@@ -80,7 +80,7 @@ describe('Zoho Invoice', function () {
         created_id = response.contact.contact_id;
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying to create a contact without params', function () {
@@ -114,7 +114,7 @@ describe('Zoho Invoice', function () {
         assert.equal(response.code, 0); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should get contacts without params argument', function (done) {
@@ -130,7 +130,7 @@ describe('Zoho Invoice', function () {
         assert.equal(response.code, 0); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should get a contact by id', function (done) {
@@ -146,7 +146,7 @@ describe('Zoho Invoice', function () {
         assert.equal(response.code, 0); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying get a contact without id property', function () {
@@ -186,7 +186,7 @@ describe('Zoho Invoice', function () {
         assert.equal(params.contact_name, response.contact.contact_name);
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying update a contact with id param missing', function () {
@@ -232,7 +232,7 @@ describe('Zoho Invoice', function () {
         assert.equal(response.code, 0); // No errors
 
         done();
-      }.bind(this.callback), 500);
+      }.bind(this.callback), 1000);
     });
 
     it('should fail when trying delete a contact with id param missing', function () {
