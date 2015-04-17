@@ -1,6 +1,7 @@
 var assert = require('assert'),
     sinon  = require('sinon'),
     faker  = require('faker'),
+    libxml = require('libxmljs'),
     config = require('./config'),
     Zoho   = require('../lib');
 
@@ -32,6 +33,25 @@ describe('Zoho CRM', function () {
 
   it('zohoCRM should have this private functions', function () {
     assert.equal(typeof zohoCRM._request, 'function');
+    assert.equal(typeof zohoCRM._build, 'function');
+  });
+
+
+  describe('Zoho Build Data', function () {
+    beforeEach(function () {
+      this.obj = {
+        'First Name': faker.name.firstName(),
+        'Last Name': faker.name.lastName(),
+        Company: faker.company.companyName(),
+        Description: 'Description & §¶e¢¥å1 ©Ã®â€£ër§'
+      };
+    });
+
+    it('should build XML data from object with wrapper', function () {
+      // var xml = zohoCRM._build('Quotes', this.obj);
+      // xml = libxml.parseXml(xml);
+      // assert.equal(xml.errors.length, 0);
+    });
   });
 
   // To assign created id;
