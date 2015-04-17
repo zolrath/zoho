@@ -48,9 +48,13 @@ describe('Zoho CRM', function () {
     });
 
     it('should build XML data from object with wrapper', function () {
-      // var xml = zohoCRM._build('Quotes', this.obj);
-      // xml = libxml.parseXml(xml);
-      // assert.equal(xml.errors.length, 0);
+      var xml = zohoCRM._build('Quotes', this.obj);
+      xml = libxml.parseXml(xml);
+
+      assert(xml.get('row').child(0).text(), this.obj['First Name']);
+      assert(xml.get('row').child(1).text(), this.obj['Last Name']);
+      assert(xml.get('row').child(2).text(), this.obj.Company);
+      assert(xml.get('row').child(3).text(), this.obj.Description);
     });
   });
 
