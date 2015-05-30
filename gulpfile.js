@@ -1,7 +1,7 @@
 var gulp  = require('gulp'),
     mocha = require('gulp-mocha');
 
-var modules = ['crm', 'invoice', 'support'];
+var modules = ['creator', 'crm', 'invoice', 'support'];
 
 gulp.task('test', function () {
   return gulp.src(['./test/**/*.js'], { read: false })

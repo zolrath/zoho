@@ -17,6 +17,22 @@ $ npm install zoho
 var Zoho = require('zoho');
 ```
 
+Using Zoho Creator:
+
+```js
+var creator = new Zoho.Creator({
+  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
+});
+
+creator.viewRecordsInView('sample','Employee_View', function (err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log(data);
+});
+```
+
 Using Zoho CRM:
 
 ```js
@@ -67,12 +83,14 @@ support.getRecords('contacts', function (err, data) {
 
 ## Supports
 
+* Zoho Creator
 * Zoho CRM
 * Zoho Invoice
 * Zoho Support
 
 ## Reference
 
+* [Zoho Creator API](https://www.zoho.com/creator/help/api/rest-api/zoho-creator-rest-api.html)
 * [Zoho CRM API](https://www.zoho.com/crm/help/api)
 * [Zoho Invoice API](https://www.zoho.com/invoice/api/v3)
 * [Zoho Support API Guide](https://www.zoho.com/support/help/api-guide.html)
