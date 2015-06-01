@@ -59,21 +59,4 @@ describe('Zoho Requests', function () {
       done();
     }.bind(this.callback), 1000);
   });
-  
-  it('should list records in a view', function (done) {
-    zohoCreator.listRecordsInView('sample', 'Employee_View', {}, this.callback);
-
-    setTimeout(function () {
-      assert(this.calledOnce);
-
-      var error = this.args[0][0], response = this.args[0][1];
-
-      assert.equal(error, null);
-      assert.equal(typeof response, 'object');
-      assert.equal(response.code, 0);
-      assert(response.data.Leads.row);
-
-      done();
-    }.bind(this.callback), 1000);
-  });
 });
