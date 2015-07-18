@@ -1,4 +1,4 @@
-# Zoho REST API Wrapper
+# zoho-node
 
 Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Support.
 
