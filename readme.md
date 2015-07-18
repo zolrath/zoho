@@ -1,4 +1,7 @@
 # Zoho REST API Wrapper
+
+Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Support.
+
 [![npm version](https://badge.fury.io/js/zoho.svg)](http://badge.fury.io/js/zoho)
 [![Build Status](https://travis-ci.org/4yopping/zoho.svg)](https://travis-ci.org/4yopping/zoho)
 [![Join the chat at https://gitter.im/4yopping/zoho](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/4yopping/zoho?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
