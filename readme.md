@@ -1,4 +1,6 @@
-# zoho-node
+![zoho-node](https://monosnap.com/file/5S223w7651B8ksuXEFSrRH1tRwo1nS.png)
+
+## Introduction
 
 Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Support.
 
@@ -14,19 +16,36 @@ Just a easy to use Zoho API integration for NodeJS, Object Oriented and REST API
 $ npm install zoho
 ```
 
-## Example
+## Features
+
+- **Zoho Creator**
+- **Zoho CRM**
+- **Zoho Invoice**
+- **Zoho Support**
+
+## API
+
+#### `Zoho`
+
+Initialize `zoho`
 
 ```js
 var Zoho = require('zoho');
 ```
 
-Using Zoho Creator:
+#### `Zoho#Creator(object)`
+
+Initialize `Creator` with an object `authtoken`
 
 ```js
 var creator = new Zoho.Creator({
   authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
 });
+```
 
+##### View records in a view:
+
+```js
 creator.viewRecordsInView('sample','Employee_View', function (err, data) {
   if (err) {
     return console.log(err);
@@ -36,13 +55,19 @@ creator.viewRecordsInView('sample','Employee_View', function (err, data) {
 });
 ```
 
-Using Zoho CRM:
+#### `Zoho#CRM(object)`
+
+Initialize `CRM` with an object `authtoken`
 
 ```js
 var crm = new Zoho.CRM({
   authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
 });
+```
 
+##### Get Records:
+
+```js
 crm.getRecords('leads', function (err, data) {
   if (err) {
     return console.log(err);
@@ -52,13 +77,19 @@ crm.getRecords('leads', function (err, data) {
 });
 ```
 
-Using Zoho Invoice:
+#### `Zoho#Invoice(object)`
+
+Initialize `Invoice` with an object `authtoken`
 
 ```js
 var invoice = new Zoho.Invoice({
   authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
 });
+```
 
+##### Get Records:
+
+```js
 invoice.getRecords('contacts', function (err, data) {
   if (err) {
     return console.log(err);
@@ -68,13 +99,19 @@ invoice.getRecords('contacts', function (err, data) {
 });
 ```
 
-Using Zoho Support:
+#### `Zoho#Support(object)`
+
+Initialize `Support` with an object `authtoken`
 
 ```js
 var support = new Zoho.Support({
   authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
 });
+```
 
+##### Get Records:
+
+```js
 support.getRecords('contacts', function (err, data) {
   if (err) {
     return console.log(err);
@@ -83,13 +120,6 @@ support.getRecords('contacts', function (err, data) {
   console.log(data);
 });
 ```
-
-## Supports
-
-* Zoho Creator
-* Zoho CRM
-* Zoho Invoice
-* Zoho Support
 
 ## Reference
 
