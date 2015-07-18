@@ -2,13 +2,12 @@
 
 ## Introduction
 
-Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Support.
+Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Support. 
 
-[![npm version](https://badge.fury.io/js/zoho.svg)](http://badge.fury.io/js/zoho)
-[![Build Status](https://travis-ci.org/4yopping/zoho.svg)](https://travis-ci.org/4yopping/zoho)
-[![Join the chat at https://gitter.im/4yopping/zoho](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/4yopping/zoho?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Inline docs](http://inch-ci.org/github/4yopping/zoho.svg?branch=master)](http://inch-ci.org/github/4yopping/zoho)
-Just a easy to use Zoho API integration for NodeJS, Object Oriented and REST API wrappers.
+- [![npm version](https://badge.fury.io/js/zoho.svg)](http://badge.fury.io/js/zoho)
+- [![Build Status](https://travis-ci.org/4yopping/zoho.svg)](https://travis-ci.org/4yopping/zoho)
+- [![Join the chat at https://gitter.im/4yopping/zoho](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/4yopping/zoho?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+- [![Inline docs](http://inch-ci.org/github/4yopping/zoho.svg?branch=master)](http://inch-ci.org/github/4yopping/zoho)
 
 ## Installation
 
@@ -43,7 +42,7 @@ var creator = new Zoho.Creator({
 });
 ```
 
-##### View records in a view:
+##### `viewRecordsInView(<string> applicationLinkName, <string> viewLinkName, <function> fn)`:
 
 ```js
 creator.viewRecordsInView('sample','Employee_View', function (err, data) {
@@ -65,7 +64,7 @@ var crm = new Zoho.CRM({
 });
 ```
 
-##### Get Records:
+##### `getRecords(<string> type, <function> fn)`:
 
 ```js
 crm.getRecords('leads', function (err, data) {
@@ -87,7 +86,7 @@ var invoice = new Zoho.Invoice({
 });
 ```
 
-##### Get Records:
+##### `getRecords(<string> type, <function> fn)`:
 
 ```js
 invoice.getRecords('contacts', function (err, data) {
@@ -109,7 +108,7 @@ var support = new Zoho.Support({
 });
 ```
 
-##### Get Records:
+##### `getRecords(<string> type, <function> fn)`:
 
 ```js
 support.getRecords('contacts', function (err, data) {
