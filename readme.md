@@ -42,7 +42,7 @@ var creator = new Zoho.Creator({
 });
 ```
 
-##### `viewRecordsInView(<string> applicationLinkName, <string> viewLinkName, <function> fn)`:
+##### `viewRecordsInView(<string> applicationLinkName, <string> viewLinkName, <function> callback)`:
 
 ```js
 creator.viewRecordsInView('sample','Employee_View', function (err, data) {
@@ -52,6 +52,56 @@ creator.viewRecordsInView('sample','Employee_View', function (err, data) {
 
   console.log(data);
 });
+```
+
+##### `addRecords(<string> applicationLinkName, <string> formLinkName, <object> params, <function> callback)`
+
+Add records.
+
+See [https://www.zoho.com/creator/help/api/rest-api/rest-api-add-records.html](https://www.zoho.com/creator/help/api/rest-api/rest-api-add-records.html)
+
+```js
+
+```
+
+##### `editRecords()`
+
+Edit records.
+
+See [https://www.zoho.com/creator/help/api/rest-api/rest-api-edit-records.html](https://www.zoho.com/creator/help/api/rest-api/rest-api-edit-records.html)
+
+```js
+
+```
+
+##### `deleteRecords()`
+
+Delete records.
+
+See [https://www.zoho.com/creator/help/api/rest-api/rest-api-delete-records.html](https://www.zoho.com/creator/help/api/rest-api/rest-api-delete-records.html)
+
+```js
+
+```
+
+##### `viewRecordsInView()`
+
+Get records in view.
+
+See [https://www.zoho.com/creator/help/api/rest-api/rest-api-view-records-in-view.html](https://www.zoho.com/creator/help/api/rest-api/rest-api-view-records-in-view.html)
+
+```js
+
+```
+
+##### `listFormFields()`
+
+List form fields.
+
+See [https://www.zoho.com/creator/help/api/rest-api/rest-api-list-form-fields.html](https://www.zoho.com/creator/help/api/rest-api/rest-api-list-form-fields.html)
+
+```js
+
 ```
 
 #### `Zoho#CRM(object)`
@@ -64,7 +114,7 @@ var crm = new Zoho.CRM({
 });
 ```
 
-##### `getRecords(<string> type, <function> fn)`:
+##### `getRecords(<string> type, <function> callback)`:
 
 ```js
 crm.getRecords('leads', function (err, data) {
@@ -86,7 +136,7 @@ var invoice = new Zoho.Invoice({
 });
 ```
 
-##### `getRecords(<string> type, <function> fn)`:
+##### `getRecords(<string> type, <function> callback)`:
 
 ```js
 invoice.getRecords('contacts', function (err, data) {
@@ -108,7 +158,7 @@ var support = new Zoho.Support({
 });
 ```
 
-##### `getRecords(<string> type, <function> fn)`:
+##### `getRecords(<string> type, <function> callback)`:
 
 ```js
 support.getRecords('contacts', function (err, data) {
