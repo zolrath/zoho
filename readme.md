@@ -64,7 +64,7 @@ See [https://www.zoho.com/creator/help/api/rest-api/rest-api-add-records.html](h
 
 ```
 
-##### `editRecords()`
+##### `editRecords(<string> applicationLinkName, <string> formLinkName, <object> params, <function> callback)`
 
 Edit records.
 
@@ -74,7 +74,7 @@ See [https://www.zoho.com/creator/help/api/rest-api/rest-api-edit-records.html](
 
 ```
 
-##### `deleteRecords()`
+##### `deleteRecords(<string> applicationLinkName, <string> formLinkName, <object> params, <function> callback)`
 
 Delete records.
 
@@ -84,7 +84,7 @@ See [https://www.zoho.com/creator/help/api/rest-api/rest-api-delete-records.html
 
 ```
 
-##### `viewRecordsInView()`
+##### `viewRecordsInView(<string> applicationLinkName, <string> formLinkName, <object> params, <function> callback)`
 
 Get records in view.
 
@@ -94,7 +94,7 @@ See [https://www.zoho.com/creator/help/api/rest-api/rest-api-view-records-in-vie
 
 ```
 
-##### `listFormFields()`
+##### `listFormFields(<string> applicationLinkName, <string> formLinkName, <object> params, <function> callback)`
 
 List form fields.
 
