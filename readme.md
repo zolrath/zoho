@@ -104,6 +104,30 @@ See [https://www.zoho.com/creator/help/api/rest-api/rest-api-list-form-fields.ht
 
 ```
 
+##### `downloadImage(<string> endpoint, <object> params, <function> callback)`
+
+Progmatically downloads a single image from Zoho Creator. Zoho doesn't officially provide support for downloading images or assets. However, this function will interact directly with the download endpoint.  This requires a valid cookie to be set prior to requests.
+
+```js
+
+creator.setCookie('somecookie');
+
+creator.downloadImage('/DownloadFile.do', {
+  filepath: '/somefilename.JPG',
+  sharedBy: '',
+  appLinkName: '',
+  viewLinkName: '',
+  recLinkID: '',
+  fieldLinkName: 'Image',
+  zcDownloadType: 'image'
+}, function (err, data) {
+  if (err) { return res.send(err); }
+  
+  res.send(new Buffer(data));
+
+});
+```
+
 #### `Zoho#CRM(object)`
 
 Initialize `CRM` with an object `authtoken`
