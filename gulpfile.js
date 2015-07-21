@@ -8,6 +8,7 @@ gulp.task('test', function () {
     .pipe(mocha({ reporter: 'dot' }));
 });
 
+// Add gulp task for individual modules
 modules.forEach(function (module) {
   gulp.task('test:' + module, function () {
     return gulp.src(['./test/'+ module + '.js'], { read: false })
