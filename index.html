@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Zoho by 4yopping</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Zoho</h1>
+        <p>Zoho REST API Wrapper</p>
+        <p class="view"><a href="https://github.com/4yopping/zoho">View the Project on GitHub <small>4yopping/zoho</small></a></p>
+        <ul>
+          <li><a href="https://github.com/4yopping/zoho/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/4yopping/zoho/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/4yopping/zoho">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="zoho-rest-api-wrapper" class="anchor" href="#zoho-rest-api-wrapper" aria-hidden="true"><span class="octicon octicon-link"></span></a>Zoho REST API Wrapper</h1>
+
+<p><a href="http://badge.fury.io/js/zoho"><img src="https://badge.fury.io/js/zoho.svg" alt="npm version"></a>
+<a href="https://travis-ci.org/4yopping/zoho"><img src="https://travis-ci.org/4yopping/zoho.svg" alt="Build Status"></a>
+<a href="https://gitter.im/4yopping/zoho?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/4yopping/zoho"></a>
+<a href="http://inch-ci.org/github/4yopping/zoho"><img src="http://inch-ci.org/github/4yopping/zoho.svg?branch=master" alt="Inline docs"></a>
+Just a easy to use Zoho API integration for NodeJS, Object Oriented and REST API wrappers.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-bash"><pre>$ npm install zoho</pre></div>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight highlight-js"><pre><span class="pl-k">var</span> Zoho <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>zoho<span class="pl-pds">'</span></span>);</pre></div>
+
+<p>Using Zoho CRM:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-k">var</span> crm <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Zoho.CRM</span>({
+  authtoken<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>bad18eba1ff45jk7858b8ae88a77fa30<span class="pl-pds">'</span></span>
+});
+
+crm.getRecords(<span class="pl-s"><span class="pl-pds">'</span>leads<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">err</span>, <span class="pl-smi">data</span>) {
+  <span class="pl-k">if</span> (err) {
+    <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
+  }
+
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(data);
+});</pre></div>
+
+<p>Using Zoho Invoice:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-k">var</span> invoice <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Zoho.Invoice</span>({
+  authtoken<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>bad18eba1ff45jk7858b8ae88a77fa30<span class="pl-pds">'</span></span>
+});
+
+invoice.getRecords(<span class="pl-s"><span class="pl-pds">'</span>contacts<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">err</span>, <span class="pl-smi">data</span>) {
+  <span class="pl-k">if</span> (err) {
+    <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
+  }
+
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(data);
+});</pre></div>
+
+<p>Using Zoho Support:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-k">var</span> support <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Zoho.Support</span>({
+  authtoken<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>bad18eba1ff45jk7858b8ae88a77fa30<span class="pl-pds">'</span></span>
+});
+
+support.getRecords(<span class="pl-s"><span class="pl-pds">'</span>contacts<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">err</span>, <span class="pl-smi">data</span>) {
+  <span class="pl-k">if</span> (err) {
+    <span class="pl-k">return</span> <span class="pl-en">console</span><span class="pl-c1">.log</span>(err);
+  }
+
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(data);
+});</pre></div>
+
+<h2>
+<a id="supports" class="anchor" href="#supports" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supports</h2>
+
+<ul>
+<li>Zoho CRM</li>
+<li>Zoho Invoice</li>
+<li>Zoho Support</li>
+</ul>
+
+<h2>
+<a id="reference" class="anchor" href="#reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reference</h2>
+
+<ul>
+<li><a href="https://www.zoho.com/crm/help/api">Zoho CRM API</a></li>
+<li><a href="https://www.zoho.com/invoice/api/v3">Zoho Invoice API</a></li>
+<li><a href="https://www.zoho.com/support/help/api-guide.html">Zoho Support API Guide</a></li>
+</ul>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>In lieu of a formal styleguide, take care to maintain the existing coding style.
+Add unit tests for any new or changed functionality. Lint and test your code.</p>
+
+<h2>
+<a id="licence" class="anchor" href="#licence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licence</h2>
+
+<p>The MIT License (MIT)</p>
+
+<p>Copyright (c) 2015 Andrés González Aragón, 4yopping and all the related trademarks</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/4yopping">4yopping</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
