@@ -42,6 +42,14 @@ var creator = new Zoho.Creator({
 });
 ```
 
+##### `setCookie(<string> cookie)`
+  
+Set a cookie for "unofficial" API calls that require direct HTTP schemes.
+
+```js
+creator.setCookie('somecookie');
+```
+
 ##### `viewRecordsInView(<string> applicationLinkName, <string> viewLinkName, <function> callback)`:
 
 ```js
