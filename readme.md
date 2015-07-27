@@ -32,7 +32,7 @@ Create a *.testrc* file with the contents below.
 [creator]
  authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
 
- ``
+ ```
 Replace with your own tokens. Don't worry, this file is ignored in the .gitignore file.
 
 
