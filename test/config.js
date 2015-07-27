@@ -1,4 +1,8 @@
 var config = require('rc')('test', {
+  creator: {
+    authtoken: process.env.ZOHO_CREATOR_TOKEN || 'YouCanPutYourZohoInvoiceTokenHere',
+    scope: 'creatorapi'
+  },
   crm: {
     authtoken: process.env.ZOHO_CRM_TOKEN || 'YouCanPutYourZohoInvoiceTokenHere',
     scope: 'crmapi'
