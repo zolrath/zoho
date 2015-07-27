@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Support. 
+Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Support.
 
 - [![npm version](https://badge.fury.io/js/zoho.svg)](http://badge.fury.io/js/zoho)
 - [![Build Status](https://travis-ci.org/4yopping/zoho.svg)](https://travis-ci.org/4yopping/zoho)
@@ -14,6 +14,27 @@ Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Suppo
 ```bash
 $ npm install zoho
 ```
+
+## Configuration
+
+Create a *.testrc* file with the contents below.
+
+```
+[crm]
+ authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
+
+[invoice]
+ authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
+
+[support]
+ authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
+
+[creator]
+ authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
+
+ ``
+Replace with your own tokens. Don't worry, this file is ignored in the .gitignore file.
+
 
 ## Features
 
@@ -43,7 +64,7 @@ var creator = new Zoho.Creator({
 ```
 
 ##### `setCookie(<string> cookie)`
-  
+
 Set a cookie for "unofficial" API calls that require direct HTTP schemes.
 
 ```js
@@ -130,7 +151,7 @@ creator.downloadImage('/DownloadFile.do', {
   zcDownloadType: 'image'
 }, function (err, data) {
   if (err) { return res.send(err); }
-  
+
   res.send(new Buffer(data));
 
 });
