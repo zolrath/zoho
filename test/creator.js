@@ -38,25 +38,3 @@ describe('Zoho Creator', function () {
 
 });
 
-describe('Zoho Requests', function () {
-  beforeEach(function () {
-    this.callback = sinon.spy();
-  });
-
-  it('should be able to make requests to Zoho server', function (done) {
-    zohoCreator._request('GET', 'fakeroute', {}, this.callback);
-
-    setTimeout(function () {
-      assert(this.calledOnce);
-
-      var error = this.args[0][0], response = this.args[0][1];
-
-      //assert.equal(response, null);
-      assert.equal(typeof error, 'object');
-      assert.equal(error.code, 4600);
-      assert(/Unable to process your request/.test(error.message));
-
-      done();
-    }.bind(this.callback), 1000);
-  });
-});
