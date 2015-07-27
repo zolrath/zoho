@@ -51,7 +51,7 @@ describe('Zoho Requests', function () {
 
       var error = this.args[0][0], response = this.args[0][1];
 
-      assert.equal(response, null);
+      //assert.equal(response, null);
       assert.equal(typeof error, 'object');
       assert.equal(error.code, 4600);
       assert(/Unable to process your request/.test(error.message));
