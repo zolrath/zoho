@@ -8,6 +8,7 @@ Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Suppo
 - [![Build Status](https://travis-ci.org/4yopping/zoho.svg)](https://travis-ci.org/4yopping/zoho)
 - [![Join the chat at https://gitter.im/4yopping/zoho](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/4yopping/zoho?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 - [![Inline docs](http://inch-ci.org/github/4yopping/zoho.svg?branch=master)](http://inch-ci.org/github/4yopping/zoho)
+- ![Dependencies](https://david-dm.org/4yopping/zoho.svg)
 
 ## Installation
 
