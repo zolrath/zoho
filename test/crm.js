@@ -7,6 +7,9 @@ var assert = require('assert'),
 
 var zohoCRM = new Zoho.CRM(config.crm);
 
+
+var recordType = ['leads'];
+
 // Zoho CRM
 describe('Zoho CRM', function () {
   it('zohoCRM should be an instance of Zoho.CRM', function () {
@@ -67,6 +70,7 @@ describe('Zoho CRM', function () {
     });
 
     it('should be able to make requests to Zoho server', function (done) {
+      this.timeout(3000);
       zohoCRM._request('GET', 'fakeroute', {}, this.callback);
 
       setTimeout(function () {
@@ -80,7 +84,7 @@ describe('Zoho CRM', function () {
         assert(/Unable to process your request/.test(error.message));
 
         done();
-      }.bind(this.callback), 1000);
+      }.bind(this.callback), 3000);
     });
   });
 
@@ -95,21 +99,23 @@ describe('Zoho CRM', function () {
     });
 
     it('should fail when trying to create a lead without params', function () {
-      zohoCRM.createRecord('leads', undefined, this.callback);
+      this.timeout(3000);
+      zohoCRM.createRecord(recordType[0], undefined, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
-      zohoCRM.createRecord('leads', {}, this.callback);
+      zohoCRM.createRecord(recordType[0], {}, this.callback);
       assert(this.callback.calledTwice);
       assert.notEqual(this.callback.args[1][0], null);
-      zohoCRM.createRecord('leads', [], this.callback);
+      zohoCRM.createRecord(recordType[0], [], this.callback);
       assert(this.callback.calledThrice);
       assert.notEqual(this.callback.args[2][0], null);
-      zohoCRM.createRecord('leads', null, this.callback);
+      zohoCRM.createRecord(recordType[0], null, this.callback);
       assert.notEqual(this.callback.args[3][0], null);
     });
 
     it('should create a lead', function (done) {
-      zohoCRM.createRecord('leads', this.params, this.callback);
+      this.timeout(3000);
+      zohoCRM.createRecord(recordType[0], this.params, this.callback);
 
       setTimeout(function () {
         assert(this.calledOnce);
@@ -123,11 +129,12 @@ describe('Zoho CRM', function () {
         created_id = response.data.FL[0].content;
 
         done();
-      }.bind(this.callback), 1000);
+      }.bind(this.callback), 3000);
     });
 
     it('should create multiple leads', function (done) {
-      zohoCRM.createRecord('leads', [
+      this.timeout(3000);
+      zohoCRM.createRecord(recordType[0], [
         {
           'First Name': faker.name.firstName(),
           'Last Name': faker.name.lastName(),
@@ -150,11 +157,11 @@ describe('Zoho CRM', function () {
         assert.equal(response.code, 0);
 
         response.data.forEach(function (record) {
-          zohoCRM.deleteRecord('leads', record.FL[0].content, function () {});
+          zohoCRM.deleteRecord(recordType[0], record.FL[0].content, function () {});
         });
 
         done();
-      }.bind(this.callback), 1000);
+      }.bind(this.callback), 3000);
     });
   });
 
@@ -164,7 +171,8 @@ describe('Zoho CRM', function () {
     });
 
     it('should get leads with params argument', function (done) {
-      zohoCRM.getRecords('leads', {}, this.callback);
+      this.timeout(3000);
+      zohoCRM.getRecords(recordType[0], {}, this.callback);
 
       setTimeout(function () {
         assert(this.calledOnce);
@@ -177,11 +185,12 @@ describe('Zoho CRM', function () {
         assert(response.data.Leads.row);
 
         done();
-      }.bind(this.callback), 1000);
+      }.bind(this.callback), 3000);
     });
 
     it('should get leads without params argument', function (done) {
-      zohoCRM.getRecords('leads', this.callback);
+      this.timeout(3000);
+      zohoCRM.getRecords(recordType[0], this.callback);
 
       setTimeout(function () {
         assert(this.calledOnce);
@@ -194,25 +203,27 @@ describe('Zoho CRM', function () {
         assert(response.data.Leads.row);
 
         done();
-      }.bind(this.callback), 1000);
+      }.bind(this.callback), 3000);
     });
 
     it('should fail when trying get a lead without id property', function () {
-      zohoCRM.getRecordById('leads', { id: undefined }, this.callback);
+      this.timeout(3000);
+      zohoCRM.getRecordById(recordType[0], { id: undefined }, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
-      zohoCRM.getRecordById('leads', undefined, this.callback);
+      zohoCRM.getRecordById(recordType[0], undefined, this.callback);
       assert(this.callback.calledTwice);
       assert.notEqual(this.callback.args[1][0], null);
-      zohoCRM.getRecordById('leads', {}, this.callback);
+      zohoCRM.getRecordById(recordType[0], {}, this.callback);
       assert(this.callback.calledThrice);
       assert.notEqual(this.callback.args[2][0], null);
-      zohoCRM.getRecordById('leads', null, this.callback);
+      zohoCRM.getRecordById(recordType[0], null, this.callback);
       assert.notEqual(this.callback.args[3][0], null);
     });
 
     it('should get a lead by id', function (done) {
-      zohoCRM.getRecordById('leads', { id: created_id }, this.callback);
+      this.timeout(3000);
+      zohoCRM.getRecordById(recordType[0], { id: created_id }, this.callback);
 
       setTimeout(function () {
         assert(this.calledOnce);
@@ -225,7 +236,7 @@ describe('Zoho CRM', function () {
         assert(response.data.Leads.row);
 
         done();
-      }.bind(this.callback), 1000);
+      }.bind(this.callback), 3000);
     });
   });
 
@@ -240,31 +251,34 @@ describe('Zoho CRM', function () {
     });
 
     it('should fail when trying update a lead with id param missing', function () {
-      zohoCRM.updateRecord('leads', undefined, this.params, this.callback);
+      this.timeout(3000);
+      zohoCRM.updateRecord(recordType[0], undefined, this.params, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
-      zohoCRM.updateRecord('leads', {}, this.params, this.callback);
+      zohoCRM.updateRecord(recordType[0], {}, this.params, this.callback);
       assert(this.callback.calledTwice);
       assert.notEqual(this.callback.args[1][0], null);
-      zohoCRM.updateRecord('leads', null, this.params, this.callback);
+      zohoCRM.updateRecord(recordType[0], null, this.params, this.callback);
       assert(this.callback.calledThrice);
       assert.notEqual(this.callback.args[2][0], null);
     });
 
     it('should fail when trying to update an account without params', function () {
-      zohoCRM.updateRecord('leads', created_id, undefined, this.callback);
+      this.timeout(3000);
+      zohoCRM.updateRecord(recordType[0], created_id, undefined, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
-      zohoCRM.updateRecord('leads', created_id, {}, this.callback);
+      zohoCRM.updateRecord(recordType[0], created_id, {}, this.callback);
       assert(this.callback.calledTwice);
       assert.notEqual(this.callback.args[1][0], null);
-      zohoCRM.updateRecord('leads', created_id, null, this.callback);
+      zohoCRM.updateRecord(recordType[0], created_id, null, this.callback);
       assert(this.callback.calledThrice);
       assert.notEqual(this.callback.args[2][0], null);
     });
 
     it('should update a lead', function (done) {
-      zohoCRM.updateRecord('leads', created_id, this.params, this.callback);
+      this.timeout(3000);
+      zohoCRM.updateRecord(recordType[0], created_id, this.params, this.callback);
 
       setTimeout(function () {
         assert(this.calledOnce);
@@ -276,7 +290,7 @@ describe('Zoho CRM', function () {
         assert.equal(response.code, 0);
 
         done();
-      }.bind(this.callback), 1000);
+      }.bind(this.callback), 3000);
     });
   });
 
@@ -286,19 +300,21 @@ describe('Zoho CRM', function () {
     });
 
     it('should fail when trying delete a lead with id param missing', function () {
-      zohoCRM.deleteRecord('leads', undefined, this.callback);
+      this.timeout(3000);
+      zohoCRM.deleteRecord(recordType[0], undefined, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
-      zohoCRM.deleteRecord('leads', {}, this.callback);
+      zohoCRM.deleteRecord(recordType[0], {}, this.callback);
       assert(this.callback.calledTwice);
       assert.notEqual(this.callback.args[1][0], null);
-      zohoCRM.deleteRecord('leads', null, this.callback);
+      zohoCRM.deleteRecord(recordType[0], null, this.callback);
       assert(this.callback.calledThrice);
       assert.notEqual(this.callback.args[2][0], null);
     });
 
     it('should delete a lead', function (done) {
-      zohoCRM.deleteRecord('leads', created_id, this.callback);
+      this.timeout(3000);
+      zohoCRM.deleteRecord(recordType[0], created_id, this.callback);
 
       setTimeout(function () {
         assert(this.calledOnce);
@@ -310,7 +326,7 @@ describe('Zoho CRM', function () {
         assert.equal(response.code, 5000);
 
         done();
-      }.bind(this.callback), 1000);
+      }.bind(this.callback), 3000);
     });
   });
 });
