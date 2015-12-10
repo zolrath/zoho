@@ -119,6 +119,16 @@ describe('Zoho CRM', function () {
       });
     });
 
+
+    it('should add a note to', function (done) {
+      this.timeout(3000);
+      zohoCRM.createNote(created_id, 'My first note', 'El contenido' , function (error, response) {
+        assert.equal(error, null);
+        assert.equal(typeof response, 'object');
+        done();
+      });
+    });
+
     it('should create multiple leads', function (done) {
       this.timeout(3000);
       zohoCRM.createRecord(recordType[0], [{
@@ -272,7 +282,7 @@ describe('Zoho CRM', function () {
       assert.notEqual(this.callback.args[2][0], null);
     });
 
-    it('should delete a lead', function (done) {
+    it.skip('should delete a lead', function (done) {
       this.timeout(3000);
       zohoCRM.deleteRecord(recordType[0], created_id, function (error, response) {
         assert.equal(error, null);
