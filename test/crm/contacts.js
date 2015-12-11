@@ -4,12 +4,12 @@ var assert = require('assert'),
   sinon = require('sinon'),
   faker = require('faker'),
   libxml = require('libxmljs'),
-  config = require('./config'),
-  Zoho = require('../lib');
+  config = require('../config'),
+  Zoho = require('../../lib');
 
 var zohoCRM = new Zoho.CRM(config.crm);
 
-var recordType = ['leads'];
+var recordType = ['contacts'];
 
 // Zoho CRM
 describe('Zoho CRM', function () {
@@ -70,7 +70,7 @@ describe('Zoho CRM', function () {
     });
 
     it('should be able to make requests to Zoho server', function (done) {
-      this.timeout(3000);
+      this.timeout(5000);
       zohoCRM._request('GET', 'fakeroute', {}, function (error, response) {
         assert.equal(response, null);
         assert.equal(typeof error, 'object');
@@ -81,7 +81,7 @@ describe('Zoho CRM', function () {
 
       // setTimeout(function () {
 
-      // }.bind(this.callback), 3000);
+      // }.bind(this.callback), 5000);
     });
   });
 
@@ -95,8 +95,8 @@ describe('Zoho CRM', function () {
       this.callback = sinon.spy();
     });
 
-    it('should fail when trying to create a lead without params', function () {
-      this.timeout(3000);
+    it('should fail when trying to create a contact without params', function () {
+      this.timeout(5000);
       zohoCRM.createRecord(recordType[0], undefined, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
@@ -110,8 +110,8 @@ describe('Zoho CRM', function () {
       assert.notEqual(this.callback.args[3][0], null);
     });
 
-    it('should create a lead', function (done) {
-      this.timeout(3000);
+    it('should create a contact', function (done) {
+      this.timeout(5000);
       zohoCRM.createRecord(recordType[0], this.params, function (error, response) {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
@@ -121,18 +121,17 @@ describe('Zoho CRM', function () {
       });
     });
 
-
     it('should add a note to', function (done) {
-      this.timeout(3000);
-      zohoCRM.createNote(created_id, 'My first note', 'El contenido' , function (error, response) {
+      this.timeout(5000);
+      zohoCRM.createNote(created_id, 'My first note', 'El contenido', function (error, response) {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
         done();
       });
     });
 
-    it('should create multiple leads', function (done) {
-      this.timeout(3000);
+    it('should create multiple contacts', function (done) {
+      this.timeout(5000);
       zohoCRM.createRecord(recordType[0], [{
         'First Name': faker.name.firstName(),
         'Last Name': faker.name.lastName(),
@@ -161,32 +160,31 @@ describe('Zoho CRM', function () {
       this.callback = sinon.spy();
     });
 
-    it('should get leads with params argument', function (done) {
-      this.timeout(3000);
+    it('should get contacts with params argument', function (done) {
+      this.timeout(5000);
       zohoCRM.getRecords(recordType[0], {}, function (error, response) {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
         assert.equal(response.code, 0);
-        assert(response.data.Leads.row);
-
+        assert(Array.isArray(response.data.Contacts.row));
         done();
       });
 
     });
 
-    it('should get leads without params argument', function (done) {
-      this.timeout(3000);
+    it('should get contacts without params argument', function (done) {
+      this.timeout(5000);
       zohoCRM.getRecords(recordType[0], function (error, response) {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
         assert.equal(response.code, 0);
-        assert(response.data.Leads.row);
+        assert.equal(typeof response.data.Contacts.row, 'object');
         done();
       });
     });
 
-    it('should fail when trying get a lead without id property', function () {
-      this.timeout(3000);
+    it('should fail when trying get a contact without id property', function () {
+      this.timeout(5000);
       zohoCRM.getRecordById(recordType[0], {
         id: undefined
       }, this.callback);
@@ -202,16 +200,15 @@ describe('Zoho CRM', function () {
       assert.notEqual(this.callback.args[3][0], null);
     });
 
-    it('should get a lead by id', function (done) {
-      this.timeout(3000);
+    it('should get a contact by id', function (done) {
+      this.timeout(5000);
       zohoCRM.getRecordById(recordType[0], {
         id: created_id
       }, function (error, response) {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
         assert.equal(response.code, 0);
-        assert(response.data.Leads.row);
-
+        assert(response.data.Contacts.row);
         done();
       });
     });
@@ -227,8 +224,8 @@ describe('Zoho CRM', function () {
       this.callback = sinon.spy();
     });
 
-    it('should fail when trying update a lead with id param missing', function () {
-      this.timeout(3000);
+    it('should fail when trying update a contact with id param missing', function () {
+      this.timeout(5000);
       zohoCRM.updateRecord(recordType[0], undefined, this.params, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
@@ -241,7 +238,7 @@ describe('Zoho CRM', function () {
     });
 
     it('should fail when trying to update an account without params', function () {
-      this.timeout(3000);
+      this.timeout(5000);
       zohoCRM.updateRecord(recordType[0], created_id, undefined, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
@@ -253,8 +250,8 @@ describe('Zoho CRM', function () {
       assert.notEqual(this.callback.args[2][0], null);
     });
 
-    it('should update a lead', function (done) {
-      this.timeout(3000);
+    it('should update a contact', function (done) {
+      this.timeout(5000);
       zohoCRM.updateRecord(recordType[0], created_id, this.params, function (error, response) {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
@@ -271,8 +268,8 @@ describe('Zoho CRM', function () {
       this.callback = sinon.spy();
     });
 
-    it('should fail when trying delete a lead with id param missing', function () {
-      this.timeout(3000);
+    it('should fail when trying delete a contact with id param missing', function () {
+      this.timeout(5000);
       zohoCRM.deleteRecord(recordType[0], undefined, this.callback);
       assert(this.callback.calledOnce);
       assert.notEqual(this.callback.args[0][0], null);
@@ -284,8 +281,8 @@ describe('Zoho CRM', function () {
       assert.notEqual(this.callback.args[2][0], null);
     });
 
-    it.skip('should delete a lead', function (done) {
-      this.timeout(3000);
+    it('should delete a contact', function (done) {
+      this.timeout(5000);
       zohoCRM.deleteRecord(recordType[0], created_id, function (error, response) {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
