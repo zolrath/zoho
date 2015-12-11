@@ -78,10 +78,6 @@ describe('Zoho CRM', function () {
         assert(/Unable to process your request/.test(error.message));
         done();
       });
-
-      // setTimeout(function () {
-
-      // }.bind(this.callback), 5000);
     });
   });
 
@@ -121,14 +117,7 @@ describe('Zoho CRM', function () {
       });
     });
 
-    it('should add a note to', function (done) {
-      this.timeout(5000);
-      zohoCRM.createNote(created_id, 'My first note', 'El contenido', function (error, response) {
-        assert.equal(error, null);
-        assert.equal(typeof response, 'object');
-        done();
-      });
-    });
+
 
     it('should create multiple contacts', function (done) {
       this.timeout(5000);
@@ -155,6 +144,20 @@ describe('Zoho CRM', function () {
     });
   });
 
+  describe('Notes for contacts', function(){
+
+        it('should add a note to', function (done) {
+          this.timeout(5000);
+          zohoCRM.createNote(created_id, faker.lorem.words(2).join(' '), faker.lorem.sentence(), function (error, response) {
+            assert.equal(error, null);
+            assert.equal(typeof response, 'object');
+            done();
+          });
+        });
+
+  })
+
+
   describe('Get Zoho CRM records', function () {
     beforeEach(function () {
       this.callback = sinon.spy();
@@ -166,7 +169,7 @@ describe('Zoho CRM', function () {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
         assert.equal(response.code, 0);
-        assert(Array.isArray(response.data.Contacts.row));
+        assert(response.data.Contacts.row);
         done();
       });
 
@@ -287,7 +290,6 @@ describe('Zoho CRM', function () {
         assert.equal(error, null);
         assert.equal(typeof response, 'object');
         assert.equal(response.code, 5000);
-
         done();
       });
 

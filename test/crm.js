@@ -284,7 +284,7 @@ describe('Zoho CRM', function () {
       assert.notEqual(this.callback.args[2][0], null);
     });
 
-    it.skip('should delete a lead', function (done) {
+    it('should delete a lead', function (done) {
       this.timeout(3000);
       zohoCRM.deleteRecord(recordType[0], created_id, function (error, response) {
         assert.equal(error, null);
