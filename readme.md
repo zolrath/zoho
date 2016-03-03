@@ -220,13 +220,13 @@ In order to colaborate to this project, create a *.testrc* file with the content
 ```
 {
   "crm": {
-    "authtoken": "ab114a48cb83776aade270143a044cdf"
+    "authtoken": "..."
   },
   "invoice": {
-    "authtoken": "66dcecdaf0d6d4c8026c0e0dacde2f94"
+    "authtoken": "..."
   },
   "support": {
-    "authtoken": "6f9bf987bd085e76912b86e9d6504001"
+    "authtoken": "..."
   }
 }
 ```
