@@ -1,41 +1,18 @@
 ![zoho-node](https://monosnap.com/file/5S223w7651B8ksuXEFSrRH1tRwo1nS.png)
 
-## Introduction
-
 Node.js Zoho helper library for integrating Zoho Creator, CRM, Invoice and Support.
 
-- [![npm version](https://badge.fury.io/js/zoho.svg)](http://badge.fury.io/js/zoho)
-- [![Build Status](https://travis-ci.org/4yopping/zoho.svg)](https://travis-ci.org/4yopping/zoho)
-- [![Join the chat at https://gitter.im/4yopping/zoho](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/4yopping/zoho?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-- [![Inline docs](http://inch-ci.org/github/4yopping/zoho.svg?branch=master)](http://inch-ci.org/github/4yopping/zoho)
-- ![Dependencies](https://david-dm.org/4yopping/zoho.svg)
+[![npm version](https://badge.fury.io/js/zoho.svg)](http://badge.fury.io/js/zoho)
+[![Build Status](https://travis-ci.org/4yopping/zoho.svg)](https://travis-ci.org/4yopping/zoho)
+[![Join the chat at https://gitter.im/4yopping/zoho](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/4yopping/zoho?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Inline docs](http://inch-ci.org/github/4yopping/zoho.svg?branch=master)](http://inch-ci.org/github/4yopping/zoho)
+![Dependencies](https://david-dm.org/4yopping/zoho.svg)
 
 ## Installation
 
 ```bash
 $ npm install zoho
 ```
-
-## Configuration
-
-Create a *.testrc* file with the contents below.
-
-```
-[crm]
- authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
-
-[invoice]
- authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
-
-[support]
- authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
-
-[creator]
- authtoken = XXXXXxxXXXxXxxXXXxXXXXxXxXXXxXXX
-
- ```
-Replace with your own tokens. Don't worry, this file is ignored in the .gitignore file.
-
 
 ## Features
 
@@ -52,6 +29,72 @@ Initialize `zoho`
 
 ```js
 var Zoho = require('zoho');
+```
+
+#### `Zoho#CRM(object)`
+
+Initialize `CRM` with an object `authtoken`
+
+```js
+var crm = new Zoho.CRM({
+  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
+});
+```
+
+##### `getRecords(<string> type, <function> callback)`:
+
+```js
+crm.getRecords('leads', function (err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log(data);
+});
+```
+
+#### `Zoho#Invoice(object)`
+
+Initialize `Invoice` with an object `authtoken`
+
+```js
+var invoice = new Zoho.Invoice({
+  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
+});
+```
+
+##### `getRecords(<string> type, <function> callback)`:
+
+```js
+invoice.getRecords('contacts', function (err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log(data);
+});
+```
+
+#### `Zoho#Support(object)`
+
+Initialize `Support` with an object `authtoken`
+
+```js
+var support = new Zoho.Support({
+  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
+});
+```
+
+##### `getRecords(<string> type, <function> callback)`:
+
+```js
+support.getRecords('contacts', function (err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log(data);
+});
 ```
 
 #### `Zoho#Creator(object)`
@@ -158,72 +201,6 @@ creator.downloadImage('/DownloadFile.do', {
 });
 ```
 
-#### `Zoho#CRM(object)`
-
-Initialize `CRM` with an object `authtoken`
-
-```js
-var crm = new Zoho.CRM({
-  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
-});
-```
-
-##### `getRecords(<string> type, <function> callback)`:
-
-```js
-crm.getRecords('leads', function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
-
-  console.log(data);
-});
-```
-
-#### `Zoho#Invoice(object)`
-
-Initialize `Invoice` with an object `authtoken`
-
-```js
-var invoice = new Zoho.Invoice({
-  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
-});
-```
-
-##### `getRecords(<string> type, <function> callback)`:
-
-```js
-invoice.getRecords('contacts', function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
-
-  console.log(data);
-});
-```
-
-#### `Zoho#Support(object)`
-
-Initialize `Support` with an object `authtoken`
-
-```js
-var support = new Zoho.Support({
-  authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
-});
-```
-
-##### `getRecords(<string> type, <function> callback)`:
-
-```js
-support.getRecords('contacts', function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
-
-  console.log(data);
-});
-```
-
 ## Reference
 
 * [Zoho Creator API](https://www.zoho.com/creator/help/api/rest-api/zoho-creator-rest-api.html)
@@ -234,29 +211,27 @@ support.getRecords('contacts', function (err, data) {
 
 
 ##Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code.
 
+In order to colaborate to this project, create a *.testrc* file with the contents below to run unit tests:
 
-##Licence
-The MIT License (MIT)
+```
+{
+  "crm": {
+    "authtoken": "ab114a48cb83776aade270143a044cdf"
+  },
+  "invoice": {
+    "authtoken": "66dcecdaf0d6d4c8026c0e0dacde2f94"
+  },
+  "support": {
+    "authtoken": "6f9bf987bd085e76912b86e9d6504001"
+  }
+}
+```
 
-Copyright (c) 2015 Andrés González Aragón, 4yopping and all the related trademarks
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## License
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+MIT
