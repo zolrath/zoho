@@ -53,6 +53,32 @@ crm.getRecords('leads', function (err, data) {
 });
 ```
 
+#### `getRecordById(<string> type, <object> params, <function> callback)`:
+
+```js
+const zohoId = 1000000000234;
+
+crm.getRecordById('accounts', { id: zohoId }, function (err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  return console.log(data);
+});
+```
+
+##### `searchRecords(<string> type, <object> params, <function> callback)`:
+
+```js
+crm.searchRecords('leads', { criteria: "(Zip Code:93420)" } function (err, data) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log(data);
+});
+```
+
 #### `Zoho#Invoice(object)`
 
 Initialize `Invoice` with an object `authtoken`
@@ -60,18 +86,6 @@ Initialize `Invoice` with an object `authtoken`
 ```js
 var invoice = new Zoho.Invoice({
   authtoken: 'bad18eba1ff45jk7858b8ae88a77fa30'
-});
-```
-
-##### `getRecords(<string> type, <function> callback)`:
-
-```js
-invoice.getRecords('contacts', function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
-
-  console.log(data);
 });
 ```
 
